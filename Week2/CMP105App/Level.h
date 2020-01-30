@@ -30,5 +30,6 @@ private:
 	int mouseLx;
 	int mouseLy;
 	bool justPressed;
-
+	sf::CircleShape circle;
+	bool circle_render;
 };

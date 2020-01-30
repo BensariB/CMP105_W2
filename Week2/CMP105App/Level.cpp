@@ -21,6 +21,11 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	text.setStyle(sf::Text::Bold);
 	text.setPosition(0, 0);
 	justPressed = 0;
+	circle.setRadius(20);
+	circle.setFillColor(sf::Color::Red);
+	circle.setOutlineColor(sf::Color::Black);
+	circle.setOutlineThickness(2.f);
+	circle_render = 0;
 }
 
 Level::~Level()
@@ -80,6 +85,14 @@ void Level::handleInput()
 		dis = sqrt(my + mx);
 		std::cout << "Distance: " << dis << std::endl;
 	}
+
+	//rendering a circle:
+	if (input->isMouseRDown() == 0) {
+		circle_render = 1;
+		input->setMouseRDown(1);
+		circle.setPosition(input->getMouseX() - circle.getRadius(), input->getMouseY() - circle.getRadius());
+	}
+
 }
 
 // Update game objects
@@ -93,6 +106,9 @@ void Level::render()
 {
 	beginDraw();
 	window->draw(text);
+	if (circle_render) {
+		window->draw(circle);
+	}
 	endDraw();
 }
 
